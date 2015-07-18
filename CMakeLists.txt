@@ -8,7 +8,7 @@ set(CMAKE_BUILD_TYPE Release)
 # check prerequisites
 if(NOT Boost_FOUND)
 	set(Boost_USE_MULTITHREADED ON)		# default is ON, use -mt variant
-	set(Boost_USE_STATIC_LIBS ON)		# default is OFF, use boost static library
+#	set(Boost_USE_STATIC_LIBS ON)		# default is OFF, use boost static library
 #	set(Boost_USE_STATIC_RUNTIME ON)	# default is not set.
 
 	find_package(Boost 1.50.0 COMPONENTS serialization thread system chrono)
@@ -80,6 +80,10 @@ set(CppRemote_SOURCE_FILES
 	${CppRemote_SOURCE_FILES_remote_serialization_system}
 )
 
+#add_compile_options(-lz -lboost_system)
+#set(CMAKE_SHARED_LINKER_FLAGS "-lz")
+
+
 #source_group("src\\remote" FILES ${CppRemote_SOURCE_FILES_remote})
 #source_group("src\\remote\\archive" FILES ${CppRemote_SOURCE_FILES_remote_archive})
 #source_group("src\\remote\\bindings" FILES ${CppRemote_SOURCE_FILES_remote_bindings})
@@ -98,4 +102,5 @@ endif()
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${CppRemote_INCLUDE_DIR})
 
-add_library(remote STATIC ${CppRemote_SOURCE_FILES})
+#add_library(remote STATIC ${CppRemote_SOURCE_FILES})
+add_library(remote SHARED ${CppRemote_SOURCE_FILES})
